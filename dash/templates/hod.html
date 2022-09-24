@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block title %}HOD{% endblock title %}
+
+{% block dropdown %}
+
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Student
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">List Students</a></li>
+                <li><a class="dropdown-item" href="#">Add Student</a></li>
+                <li><a class="dropdown-item" href="#">Remove Student</a></li>
+
+            </ul>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Staff
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Create Class Teacher</a></li>
+                <li><a class="dropdown-item" href="#">Assign Class Teacher</a></li>
+                <li><a class="dropdown-item" href="#">Remove Class Teacher</a></li>
+
+            </ul>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="{% url 'ulogout' %}">Logout</a>
+        </li>
+    </ul>
+
+</div>
+
+{% endblock dropdown %}
+
+{% block body %}
+
+<div>
+    <div style="text-align: center; padding-top: 20px; font-family: sans-serif;">
+        <h2> <strong> HOD Dashboard </strong> </h2>
+        <h4> <strong> Department Analytics </strong></h4>
+    </div>
+    <br>
+    <div style="border: 2px solid rgba(255, 0, 0, 0.775); width: 1400px; height: 500px; margin:auto; border-radius: 10px; box-shadow:2px 2px 2px 2px rgba(32, 31, 31, 0.485) ;">
+        <br>
+        <h4 style="padding-left: 10px; margin: 10px; width: 500px;">Total Number of Students: {{count}}</h4>
+        <br>
+        
+        <h5 style="padding-left: 10px; margin: 10px; width: 500px;">Total Number of Students Absent: {{count}}</h5>
+        <h5 style="padding-left: 10px; margin: 10px; width: 500px;">Students Absent I Year (Absent/Total): {{count}}</h5>
+        <h5 style="padding-left: 10px; margin: 10px; width: 500px;">Students Absent II Year (Absent/Total): {{count}}</h5>
+        <h5 style="padding-left: 10px; margin: 10px; width: 500px;">Students Absent III Year (Absent/Total): {{count}}</h5>
+        <h5 style="padding-left: 10px; margin: 10px; width: 500px;">Students Absent IV Year (Absent/Total): {{count}}</h5>
+    </div>
+</div>
+{% endblock body %}
