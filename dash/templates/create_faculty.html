@@ -1,0 +1,25 @@
+{% extends 'base_hod.html' %}
+
+{% block title %}Create Faculty{% endblock title %}
+
+{% block body %}
+<h3 style="text-align: center; padding-top:30px;">
+    Create Faculty Member
+</h3>
+
+<div style="margin: auto; width:30%; padding-top: 50px;">
+    <form action="{% url 'create_faculty' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input name = "name" type="name" class="form-control" id="name" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input name="email" type="email" class="form-control" id="email">
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Create Faculty</button>
+    </form>
+</div>
+{% endblock body %}

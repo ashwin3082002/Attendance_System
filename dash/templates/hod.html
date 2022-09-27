@@ -1,46 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'base_hod.html' %}
 
 {% block title %}HOD{% endblock title %}
-
-{% block dropdown %}
-
-<div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Student
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">List Students</a></li>
-                <li><a class="dropdown-item" href="#">Add Student</a></li>
-                <li><a class="dropdown-item" href="#">Remove Student</a></li>
-
-            </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Staff
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Create Class Teacher</a></li>
-                <li><a class="dropdown-item" href="#">Assign Class Teacher</a></li>
-                <li><a class="dropdown-item" href="#">Remove Class Teacher</a></li>
-
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'ulogout' %}">Logout</a>
-        </li>
-    </ul>
-
-</div>
-
-{% endblock dropdown %}
 
 {% block body %}
 
