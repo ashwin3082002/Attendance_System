@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'loginpg.apps.LoginpgConfig',
     'dash.apps.DashConfig',
+    'amsdb.apps.AmsdbConfig',
 ]
 
 MIDDLEWARE = [
