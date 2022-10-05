@@ -142,3 +142,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login'
+
+#Email Settings
+EMAIL_HOST =  "smtp.office365.com"
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "siportal@itsashw.in"
+EMAIL_HOST_PASSWORD = "wearegreat@csbs123"
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+

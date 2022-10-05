@@ -9,7 +9,13 @@ def ulogin(request):
         username = request.POST.get('uname')
         password = request.POST.get('psw')
         user = authenticate(username=username, password=password)
-        if user is not None:
+
+        b = list(user.groups.filter(name='faculty'))!=[]
+        
+        if b and user is not None:
+            login(request,user)
+            return redirect('facdash')
+        elif user is not None:
                 login(request,user)
                 return redirect('hodash')
         else:
