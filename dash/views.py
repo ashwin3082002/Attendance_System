@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from attendance.settings import LOGIN_URL
 from django.contrib.auth.models import User
-from amsdb.models import faculty_details
+from amsdb.models import faculty_detail
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from util import func
@@ -21,7 +21,7 @@ def create_faculty(request):
         name = request.POST.get('name')
         email =request.POST.get('email')
         password = User.objects.make_random_password()
-        db_instance = faculty_details(
+        db_instance = faculty_detail(
             name=name,
             email = email
         )
