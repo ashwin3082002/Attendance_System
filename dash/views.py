@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from attendance.settings import LOGIN_URL
 from django.contrib.auth.models import User
-from amsdb.models import faculty_detail
+from amsdb.models import faculty_detail, classes, student_detail, attendance, subject, course, timetable
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from util import func
@@ -23,7 +23,7 @@ def create_faculty(request):
         password = User.objects.make_random_password()
         db_instance = faculty_detail(
             name=name,
-            email = email
+            email=email
         )
         if func.faculty_creation_mail(email,password, name):
             db_instance.save()
@@ -41,6 +41,30 @@ def create_faculty(request):
     return render(request,'create_faculty.html')
 
 @login_required(login_url=LOGIN_URL)
+@allowed_users(allowed_roles=['hod'])
+def create_course(request):
+    if request.method=='POST':
+        sub_id = request.POST.get('subject_id')
+        sub_nam = request.POST.get('subject_name')
+        db_ins = course(
+            c_name=sub_nam,
+            c_id = sub_id
+        )
+        db_ins.save()
+        messages.success(request,'Course Added!!')
+        return redirect('create_course')
+
+    return render(request,'create_course.html')
+
+@login_required(login_url=LOGIN_URL)
+@allowed_users(allowed_roles=['hod'])
+def create_class(request):
+    return render(request,'create_class.html')
+
+
+@login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['faculty'])
 def facdash(request):
     return render(request, 'facdash.html')
+
+

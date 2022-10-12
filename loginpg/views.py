@@ -9,8 +9,11 @@ def ulogin(request):
         username = request.POST.get('uname')
         password = request.POST.get('psw')
         user = authenticate(username=username, password=password)
-
-        b = list(user.groups.filter(name='faculty'))!=[]
+        try:
+            b = list(user.groups.filter(name='faculty'))!=[]
+        except:
+            messages.error(request,"Incorrect Credentials")
+            return redirect('ulogin')
         
         if b and user is not None:
             login(request,user)

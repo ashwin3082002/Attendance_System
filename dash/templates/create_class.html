@@ -1,0 +1,42 @@
+{% extends 'base_hod.html' %}
+
+{% block title %}Create Class{% endblock title %}
+
+{% block body %}
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<h3 style="text-align: center; padding-top:30px;">
+    Create Class
+</h3>
+
+<div style="margin: auto; width:30%; padding-top: 50px;">
+    <form action="{% url 'create_class' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+        <label for="sem" class="form-label">Semester</label>
+        <input name = "sem" type="text" class="form-control" id="sem" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+        <label for="year" class="form-label">Year</label>
+        <input name="year" type="text" class="form-control" id="year">
+        </div>
+        <div class="mb-3">
+            <label for="section" class="form-label">Section</label>
+            <input name="section" type="text" class="form-control" id="section">
+        </div>
+        <div class="mb-3">
+            <label for="ct" class="form-label">Class Teacher</label>
+            <input name="ct" type="text" class="form-control" id="ct">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+</div>
+
+{% endblock body %}
