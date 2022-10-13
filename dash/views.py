@@ -134,7 +134,6 @@ def add_students(request):
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['faculty'])
 def list_students(request):
-
     students = student_detail.objects.all()
     cont={'students': students}
     return render(request, 'list_students.html', context=cont)
@@ -150,4 +149,7 @@ def mark_attendance(request):
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['faculty'])
 def add_timetable(request):
-    return render(request, 'add_timetable.html')
+    email=request.session['staff_email']
+    subj = subject.objects.filter(staff_id=email)
+    context = {'subjects':subj}
+    return render(request, 'add_timetable.html', context=context)

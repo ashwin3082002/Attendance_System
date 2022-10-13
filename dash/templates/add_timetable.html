@@ -1,6 +1,6 @@
 {% extends 'base_fac.html' %}
 
-{% block title %}Faculty{% endblock title %}
+{% block title %}Timetable{% endblock title %}
 
 {% block body %}
 <h1 style='text-align:center; padding-top:20px;'>Timetable</h1>
@@ -16,7 +16,7 @@
 </div>
 {% endif %}
 
-
+<form action="">
 <div class="t-spacing">
     <table class="table table-striped">
         <thead>
@@ -38,78 +38,348 @@
                     <th scope="row">Monday</th>
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
 
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
 
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
                     <td>
                         <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
                         </select>
                     </td>
-                    
+                </tr>
 
+                <tr>
+                    <th scope="row">Tuesday</th>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Wednesday</th>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Thursday</th>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Friday</th>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            {% for subject in subjects  %}
+                            <option value="{{subject.sub_id}}">{{subject}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
                 </tr>
         </tbody>
       </table>
-
-        <form >
-            <button> Submit</button>
-        </form>
+      <br><br>
+      <button type="submit" class="btn btn-primary">Add Timetable</button>
 </div>
+</form>
 
 {% endblock body %}
