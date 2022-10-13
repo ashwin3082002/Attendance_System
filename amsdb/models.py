@@ -1,3 +1,4 @@
+from datetime import date
 from random import choices
 from django.db import models
 
@@ -48,10 +49,19 @@ class subject(models.Model):
 class attendance(models.Model):
     roll_no = models.ForeignKey(student_detail,on_delete=models.CASCADE)
     s_class = models.ForeignKey(classes,on_delete=models.CASCADE)
-    subject_code = models.ForeignKey(subject,on_delete=models.CASCADE)
-    status = models.CharField(max_length=120)
-    attendance_student = models.CharField(max_length=100)
+    overall = models.CharField(max_length=120)
+    first = models.CharField(max_length=120)
+    second = models.CharField(max_length=120)
+    third = models.CharField(max_length=120)
+    fourth = models.CharField(max_length=120)
+    fifth = models.CharField(max_length=120)
+    sixth = models.CharField(max_length=120)
+    seveen = models.CharField(max_length=120)
+    eight = models.CharField(max_length=120)
     date = models.DateField()
+
+    def __str__(self):
+        return f"{self.roll_no} - {self.date}"
 
 class timetable(models.Model):
     class_s = models.ForeignKey(classes, on_delete=models.CASCADE)

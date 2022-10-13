@@ -13,7 +13,9 @@ import datetime
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['hod'])
 def hodash(request):
-    return render(request,'hod.html')
+    stu = student_detail.objects.all()
+    cont = {'count':len(stu)}
+    return render(request,'hod.html',context=cont)
 
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['hod'])
@@ -143,13 +145,57 @@ def list_students(request):
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['faculty'])
 def mark_attendance(request):
+    email=request.session['staff_email']
+    fac = faculty_detail.objects.get(email=email)
+    clas = classes.objects.get(teacher=fac)
     students = student_detail.objects.all()
     currentdate = datetime.date.today()
     day = currentdate.strftime("%A")
     tt = timetable.objects.get(day=day)
-    
 
-    cont={'students': students}
+
+    if request.method == "POST":
+        cn = 1
+        for i in request.POST:
+            if cn==1:
+                cn+=1
+                continue
+            stu=student_detail.objects.get(roll_no=i)
+            class_id = stu.s_class.class_id
+            clas = classes.objects.get(class_id=class_id)
+            data=request.POST.getlist(i)
+            dic = {
+                'overall':data[0],
+                'first':data[1],
+                'second':data[2],
+                'third':data[3],
+                'fourth':data[4],
+                'fifth':data[5],
+                'sixth':data[6],
+                'seveen':data[7],
+                'eight':data[8],
+            } 
+            db_ins = attendance(
+                roll_no = stu,
+                s_class = clas,
+                overall = dic['overall'],
+                first = dic['first'],
+                second = dic['second'],
+                third = dic['third'],
+                fourth = dic['fourth'],
+                fifth = dic['fifth'],
+                sixth = dic['sixth'],
+                seveen = dic['seveen'],
+                eight = dic['eight'],
+                date= datetime.date.today()
+            )
+            db_ins.save()
+        messages.success(request,"Attendance Marked!!")
+
+        return redirect('mark_attendance')
+
+
+    cont={'students': students,'tt':tt,'classs':clas,'range':range(9)}
     return render(request, 'mark_attendance.html', context=cont)
 
 @login_required(login_url=LOGIN_URL)

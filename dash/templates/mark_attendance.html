@@ -3,10 +3,6 @@
 {% block title %}Faculty{% endblock title %}
 
 {% block body %}
-<h1 style='text-align:center; padding-top:20px;'>Attendance</h1>
-
-
-
 {% if messages %}
 <div class="alert alert-warning alert-dismissible fade show" role="alert">
   {% for message in messages %}
@@ -15,105 +11,51 @@
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 {% endif %}
+<h1 style='text-align:center; padding-top:20px;'>Attendance</h1>
 
 
+
+
+
+<form action="{% url 'mark_attendance' %}" method="POST">
+    {% csrf_token %}
+    <input type="text" hidden value={{classs.class_id}}>
 <div class="t-spacing">
     <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">Roll No</th>
             <th scope="col">Status</th>
-            <th scope="col">Period 1 - Mathematics</th>
-            <th scope="col">Period 2 - English</th>
-            <th scope="col">Period 3 - Operations Research</th>
-            <th scope="col">Period 4 - Computation</th>
-            <th scope="col">Period 5 - Telehealth</th>
-            <th scope="col">Period 6 - Data Structures</th>
-            <th scope="col">Period 7 - Database Management</th>
-            <th scope="col">Period 8 - Economics</th>
+            <th scope="col">{{tt.first}}</th>
+            <th scope="col">{{tt.second}}</th>
+            <th scope="col">{{tt.third}}</th>
+            <th scope="col">{{tt.fourth}}</th>
+            <th scope="col">{{tt.fifth}}</th>
+            <th scope="col">{{tt.sixth}}</th>
+            <th scope="col">{{tt.seveen}}</th>
+            <th scope="col">{{tt.eight}}</th>
           </tr>
         </thead>
         <tbody>
             {% for student in students %}
                 <tr>
                     <th scope="row">{{student.roll_no}}</th>
+                    {% for i in range %}
                     <td>
-                        <select class="custom-select" id="inputGroupSelect01">
+                        <select name="{{student.roll_no}}" class="custom-select" id="inputGroupSelect01">
                             <option value="p" selected>Present</option>
                             <option value="a">Absent</option>
                             <option value="od">On Duty</option>
                         </select>
                     </td>
-
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-                    <td>
-                        <select class="custom-select" id="inputGroupSelect01">
-                            <option value="p" selected>Present</option>
-                            <option value="a">Absent</option>
-                            <option value="od">On Duty</option>
-                        </select>
-                    </td>
-                    
-
+                    {% endfor %}
                 </tr>
             {% endfor %}
         </tbody>
       </table>
-
-        <form >
-            <button> Submit</button>
-        </form>
+       <button type="submit" class="btn btn-primary">Mark Attendance</button>
 </div>
-
+</form>
 
 
 
