@@ -13,10 +13,8 @@
                 Student
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">List Students</a></li>
-                <li><a class="dropdown-item" href="#">Add Student</a></li>
-                <li><a class="dropdown-item" href="#">Remove Student</a></li>
-
+                <li><a class="dropdown-item" href="{% url 'list_students' %}">List Students</a></li>
+                <li><a class="dropdown-item" href="{% url 'add_students' %}">Add Student</a></li>
             </ul>
         </li>
         <li class="nav-item">

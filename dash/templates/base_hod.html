@@ -5,12 +5,12 @@
 <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{% url 'hodash' %}">Home</a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                Utility
+                Actions
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'create_course' %}">Create Course</a></li>
@@ -26,7 +26,6 @@
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{% url 'create_faculty' %}">Create Faculty</a></li>
-                <li><a class="dropdown-item" href="{% url 'assign_class' %}">Assign Class</a></li>
 
             </ul>
         </li>
@@ -36,7 +35,4 @@
     </ul>
 
 </div>
-
-
-
 {% endblock dropdown %}

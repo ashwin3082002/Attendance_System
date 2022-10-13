@@ -1,0 +1,54 @@
+{% extends 'base_hod.html' %}
+
+{% block title %}
+Assign Subject
+{% endblock title %}
+
+{% block body %}
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<h3 style="text-align: center; padding-top:30px;">
+    Assign Subject
+</h3>
+
+<div style="margin: auto; width:30%; padding-top: 50px;">
+    <form action="{% url 'assign_subject' %}" method="POST">
+        {% csrf_token %}
+        <label class="form-label" for="">Subject Name</label>
+        <select class="form-select" name="subject_code" aria-label="Default select example">
+            <option selected>Choose a Subject</option>
+            {% for subject in subjects %}
+                <option value="{{subject.c_id}}">{{subject.c_name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label class="form-label" for="">Staff</label>
+        <select class="form-select" name="staff" aria-label="Default select example">
+            <option selected>Choose a Subject</option>
+            {% for staff in staffs %}
+                <option value="{{staff.email}}">{{staff.name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label class="form-label" for="">Class</label>
+        <select class="form-select" name="clas" aria-label="Default select example">
+            <option selected>Choose a class</option>
+            {% for class in classes %}
+                <option value="{{class.class_id}}">{{class}}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        
+        <button type="submit" class="btn btn-primary">Create Faculty</button>
+    </form>
+</div>
+{% endblock body %}
+
