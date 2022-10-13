@@ -143,9 +143,11 @@ def list_students(request):
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['faculty'])
 def mark_attendance(request):
-    
-    
-    
     students = student_detail.objects.all()
     cont={'students': students}
     return render(request, 'mark_attendance.html', context=cont)
+
+@login_required(login_url=LOGIN_URL)
+@allowed_users(allowed_roles=['faculty'])
+def add_timetable(request):
+    return render(request, 'add_timetable.html')

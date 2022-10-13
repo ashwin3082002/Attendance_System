@@ -42,6 +42,9 @@ class subject(models.Model):
     staff_id = models.ForeignKey(faculty_detail,on_delete=models.CASCADE)
     class_id = models.ForeignKey(classes,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.subject_code.c_name
+
 class attendance(models.Model):
     roll_no = models.ForeignKey(student_detail,on_delete=models.CASCADE)
     s_class = models.ForeignKey(classes,on_delete=models.CASCADE)
