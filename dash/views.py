@@ -7,6 +7,7 @@ from django.contrib import messages
 from django.contrib.auth.models import Group
 from util import func
 from .decoraters import allowed_users
+import datetime
 # Create your views here.
 
 @login_required(login_url=LOGIN_URL)
@@ -134,7 +135,6 @@ def add_students(request):
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['faculty'])
 def list_students(request):
-
     students = student_detail.objects.all()
     cont={'students': students}
     return render(request, 'list_students.html', context=cont)
@@ -144,10 +144,87 @@ def list_students(request):
 @allowed_users(allowed_roles=['faculty'])
 def mark_attendance(request):
     students = student_detail.objects.all()
+    currentdate = datetime.date.today()
+    day = currentdate.strftime("%A")
+    tt = timetable.objects.get(day=day)
+    
+
     cont={'students': students}
     return render(request, 'mark_attendance.html', context=cont)
 
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['faculty'])
 def add_timetable(request):
-    return render(request, 'add_timetable.html')
+    email=request.session['staff_email']
+    fac = faculty_detail.objects.get(email=email)
+    try:
+        clas = classes.objects.get(teacher=fac)
+    except:
+        messages.error(request,'You have not been assigned a Class!! Kindly contact HOD')
+        return redirect('facdash')
+    
+
+    if request.method == 'POST':
+        m1 = request.POST.get('m1')
+        m2 = request.POST.get('m2')
+        m3 = request.POST.get('m3')
+        m4 = request.POST.get('m4')
+        m5 = request.POST.get('m5')
+        m6 = request.POST.get('m6')
+        m7 = request.POST.get('m7')
+        m8 = request.POST.get('m8')
+        t1 = request.POST.get('t1')
+        t2 = request.POST.get('t2')
+        t3 = request.POST.get('t3')
+        t4 = request.POST.get('t4')
+        t5 = request.POST.get('t5')
+        t6 = request.POST.get('t6')
+        t7 = request.POST.get('t7')
+        t8 = request.POST.get('t8')
+        w1 = request.POST.get('w1')
+        w2 = request.POST.get('w2')
+        w3 = request.POST.get('w3')
+        w4 = request.POST.get('w4')
+        w5 = request.POST.get('w5')
+        w6 = request.POST.get('w6')
+        w7 = request.POST.get('w7')
+        w8 = request.POST.get('w8')
+        th1 = request.POST.get('th1')
+        th2 = request.POST.get('th2')
+        th3 = request.POST.get('th3')
+        th4 = request.POST.get('th4')
+        th5 = request.POST.get('th5')
+        th6 = request.POST.get('th6')
+        th7 = request.POST.get('th7')
+        th8 = request.POST.get('th8')
+        f1 = request.POST.get('f1')
+        f2 = request.POST.get('f2')
+        f3 = request.POST.get('f3')
+        f4 = request.POST.get('f4')
+        f5 = request.POST.get('f5')
+        f6 = request.POST.get('f6')
+        f7 = request.POST.get('f7')
+        f8 = request.POST.get('f8')
+        dic = {'Monday':[m1,m2,m3,m4,m5,m6,m7,m8],'Tuesday':[t1,t2,t3,t4,t5,t6,t7,t8],'Wednesday':[w1,w2,w3,w4,w5,w6,w7,w8],'Thursday':[th1,th2,th3,th4,th5,th6,th7,th8],'Friday':[f1,f2,f3,f4,f5,f6,f7,f8]}
+        for i in dic:
+            db_inst = timetable(
+                class_s = clas,
+                day = i,
+                first= subject.objects.get(sub_id=dic[i][0]),
+                second= subject.objects.get(sub_id=dic[i][1]),
+                third= subject.objects.get(sub_id=dic[i][2]),
+                fourth= subject.objects.get(sub_id=dic[i][3]),
+                fifth= subject.objects.get(sub_id=dic[i][4]),
+                sixth= subject.objects.get(sub_id=dic[i][5]),
+                seveen= subject.objects.get(sub_id=dic[i][6]),
+                eight= subject.objects.get(sub_id=dic[i][7])
+            )
+            db_inst.save()
+        messages.success(request,"Timetable Added")
+        return redirect('facdash')
+    
+    email=request.session['staff_email']
+    clas = classes.objects.get(teacher=fac)
+    subj = subject.objects.filter(class_id=clas.class_id)
+    context = {'subjects':subj}
+    return render(request, 'add_timetable.html', context=context)

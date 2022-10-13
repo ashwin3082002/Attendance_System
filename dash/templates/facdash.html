@@ -3,6 +3,17 @@
 {% block title %}Faculty{% endblock title %}
 
 {% block body %}
+{% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    {% endif %}
 <h1 style='text-align:center; padding-top:20px;'>Faculty Dashboard</h1>
 
 <br>
