@@ -1,0 +1,122 @@
+{% extends 'base_fac.html' %}
+
+{% block title %}Faculty{% endblock title %}
+
+{% block body %}
+<h1 style='text-align:center; padding-top:20px;'>Attendance</h1>
+
+
+
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+
+<div class="t-spacing">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Roll No</th>
+            <th scope="col">Status</th>
+            <th scope="col">Period 1 - Mathematics</th>
+            <th scope="col">Period 2 - English</th>
+            <th scope="col">Period 3 - Operations Research</th>
+            <th scope="col">Period 4 - Computation</th>
+            <th scope="col">Period 5 - Telehealth</th>
+            <th scope="col">Period 6 - Data Structures</th>
+            <th scope="col">Period 7 - Database Management</th>
+            <th scope="col">Period 8 - Economics</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+                <tr>
+                    <th scope="row">{{student.roll_no}}</th>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option value="p" selected>Present</option>
+                            <option value="a">Absent</option>
+                            <option value="od">On Duty</option>
+                        </select>
+                    </td>
+                    
+
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+
+        <form >
+            <button> Submit</button>
+        </form>
+</div>
+
+
+
+
+
+
+{% endblock body %}

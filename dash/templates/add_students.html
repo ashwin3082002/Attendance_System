@@ -1,0 +1,50 @@
+{% extends 'base_fac.html' %}
+
+{% block title %}Add Students{% endblock title %}
+
+{% block body %}
+{% if messages %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+  {% endfor %}
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+
+<h3 style="text-align: center; padding-top:30px;">
+    Create Student
+</h3>
+
+<div style="margin: auto; width:30%; padding-top: 50px;">
+    <form action="{% url 'add_students' %}" method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input name = "name" type="name" class="form-control" id="name" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input name="email" type="email" class="form-control" id="email">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Roll Number</label>
+            <input name="roll_no" type="text" class="form-control" id="email">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Register Number</label>
+            <input name="register_no" type="text" class="form-control" id="email">
+        </div>
+        <label class="form-label" for="">Class</label>
+        <select class="form-select" name="clas" aria-label="Default select example">
+            <option selected>Choose a class</option>
+            {% for class in classes %}
+                <option value="{{class.class_id}}">{{class}}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <button type="submit" class="btn btn-primary">Create Student</button>
+    </form>
+</div>
+{% endblock body %}

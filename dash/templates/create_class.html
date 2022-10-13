@@ -20,21 +20,30 @@
     <form action="{% url 'create_class' %}" method="POST">
         {% csrf_token %}
         <div class="mb-3">
-        <label for="sem" class="form-label">Semester</label>
-        <input name = "sem" type="text" class="form-control" id="sem" aria-describedby="emailHelp">
+            <label for="sem" class="form-label">Semester</label>
+            <input name = "sem" type="text" class="form-control" id="sem" aria-describedby="emailHelp">
         </div>
+
         <div class="mb-3">
-        <label for="year" class="form-label">Year</label>
-        <input name="year" type="text" class="form-control" id="year">
+            <label for="year" class="form-label">Year</label>
+            <input name="year" type="text" class="form-control" id="year">
         </div>
+
         <div class="mb-3">
             <label for="section" class="form-label">Section</label>
             <input name="section" type="text" class="form-control" id="section">
         </div>
-        <div class="mb-3">
-            <label for="ct" class="form-label">Class Teacher</label>
-            <input name="ct" type="text" class="form-control" id="ct">
-        </div>
+        
+        <label for="">Class Teacher</label>
+        <br>
+        <select class="form-select" name="staff" aria-label="Default select example">
+            <option selected>Choose a Class Teacher</option>
+            {% for staff in staffs %}
+                <option value="{{staff.name}}">{{staff.name}}</option>
+            {% endfor %}
+        </select>
+        
+        <br>
         <button type="submit" class="btn btn-primary">Add</button>
     </form>
 </div>
