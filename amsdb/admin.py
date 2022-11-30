@@ -1,7 +1,7 @@
 from re import sub
 from time import time
 from django.contrib import admin
-from .models import faculty_detail, classes, student_detail, attendance, subject, course, timetable
+from .models import faculty_detail, classes, student_detail, attendance, subject, course, timetable, stu_atten
 
 # Register your models here.
 from django.contrib.sessions.models import Session
@@ -18,3 +18,4 @@ admin.site.register(attendance)
 admin.site.register(subject)
 admin.site.register(course)
 admin.site.register(timetable)
+admin.site.register(stu_atten)

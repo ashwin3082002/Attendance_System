@@ -6,6 +6,7 @@ from django.db import models
 class faculty_detail(models.Model):
     name = models.CharField(max_length=120)
     email = models.EmailField(primary_key=True)
+    class_teacher = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -74,3 +75,12 @@ class timetable(models.Model):
     sixth = models.ForeignKey(subject,on_delete=models.CASCADE, related_name='Sixth_Hour')
     seveen = models.ForeignKey(subject,on_delete=models.CASCADE, related_name='Seveen_Hour')
     eight = models.ForeignKey(subject,on_delete=models.CASCADE, related_name='Eight_Hour')
+
+class stu_atten(models.Model):
+    name = models.CharField(max_length=255)
+    roll = models.CharField(max_length=255)
+    total_present = models.CharField(max_length=255)
+    total_absent = models.CharField(max_length=255)
+    percentage = models.CharField(max_length=255)
+    date_gen = models.DateField()
+    status = models.BooleanField()

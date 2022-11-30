@@ -19,6 +19,21 @@ def faculty_creation_mail(emailto, password, name):
     email.send()
     return True
 
+def send_warning_mail(emailto, name):
+    subject = 'Attendance Warning!!'
+    to = emailto
+    html_content = render_to_string('mail/sendwarning.html',{'name':name})
+    text_content = strip_tags(html_content)
+    email = EmailMultiAlternatives(
+        subject,
+        text_content,
+        settings.EMAIL_HOST_USER,
+        [to]
+    )
+    email.attach_alternative(html_content,"text/html")
+    email.send()
+    return True
+
 def sendotp(emailto):
     subject = 'OTP | Attendance PEC'
     to = emailto

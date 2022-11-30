@@ -1,0 +1,58 @@
+{% extends 'base_fac.html' %}
+
+{% block title %}Faculty{% endblock title %}
+
+{% block body %}
+{% if messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close"></button>
+        </div>
+    {% endif %}
+<h1 style='text-align:center; padding-top:20px;'>Report</h1>
+
+<div style="display: flex; align-items: center; justify-content: center; margin: 0 auto; height: 100vh; width: 1000px; height: auto;">
+    <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Roll Number</th>
+            <th scope="col">Total Working Days</th>
+            <th scope="col">Total Present Days</th>
+            <th scope="col">Total Absent Days</th>
+            <th scope="col">Percentage</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for student in students  %}
+          <tr>
+            <th scope="row">1</th>
+            <td>{{student.name}}</td>
+            <td>{{student.roll}}</td>
+            <td>{{working_days}}</td>
+            <td>{{student.total_present}}</td>
+            <td>{{student.total_absent}}</td>
+            <td>{{student.percentage}}</td>
+            {% if student.status == True%}
+            <form action="{% url 'sendwarning' %}" method="POST">
+              {% csrf_token %}
+              <input name="roll" type="text" value = {{student.roll}} hidden>
+            <td><button type="submit" id="myButton" class="btn btn-danger">Send Warning</button></td>
+          </form>
+            {% elif student.status == False%}
+            <td>Nothing</td>
+            {% endif %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+</div>
+{% endblock body %}

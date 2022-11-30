@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from attendance.settings import LOGIN_URL
 from django.contrib.auth.models import User
-from amsdb.models import faculty_detail, classes, student_detail, attendance, subject, course, timetable
+from amsdb.models import faculty_detail, classes, student_detail, attendance, subject, course, timetable,stu_atten
 from django.contrib import messages
 from django.contrib.auth.models import Group
 from util import func
 from .decoraters import allowed_users
 import datetime
+import random
+
 # Create your views here.
 
 @login_required(login_url=LOGIN_URL)
@@ -26,7 +28,8 @@ def create_faculty(request):
         password = User.objects.make_random_password()
         db_instance = faculty_detail(
             name=name,
-            email=email
+            email=email,
+            class_teacher = True
         )
         if func.faculty_creation_mail(email,password, name):
             db_instance.save()
@@ -42,6 +45,23 @@ def create_faculty(request):
             messages.error(request, "Something Went Wrong!!! Try Again...")
         return redirect('create_faculty')
     return render(request,'create_faculty.html')
+
+@login_required(login_url=LOGIN_URL)
+@allowed_users(allowed_roles=['hod'])
+def create_faculty1(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email =request.POST.get('email')
+        db_instance = faculty_detail(
+            name=name,
+            email=email,
+            class_teacher = False
+        )
+        db_instance.save()
+        messages.error(request, "Faculty Created!!!")
+        return redirect('create_faculty1')
+
+    return render(request,'create_faculty1.html')
 
 @login_required(login_url=LOGIN_URL)
 @allowed_users(allowed_roles=['hod'])
@@ -78,7 +98,7 @@ def create_class(request):
         messages.success(request,"Class Created!!")
         return redirect('create_class')
 
-    dat = faculty_detail.objects.all()
+    dat = faculty_detail.objects.filter(class_teacher=True)
     cont={'staffs':dat}
     return render(request,'create_class.html',context=cont)
 
@@ -95,7 +115,7 @@ def assign_subject(request):
             class_id=classes.objects.get(class_id=classs)
         )
         db_inst.save()
-        messages.success(request,'Class Created!!')
+        messages.success(request,'Subject Created!!')
         return redirect('assign_subject')
 
     subj =course.objects.all()
@@ -174,7 +194,17 @@ def mark_attendance(request):
                 'sixth':data[6],
                 'seveen':data[7],
                 'eight':data[8],
-            } 
+            }
+            if dic['overall'] == "a":
+                dic['first'] = "a"
+                dic['second'] = "a"
+                dic['third'] = "a"
+                dic['fourth'] = "a"
+                dic['fifth'] = "a"
+                dic['sixth'] = "a"
+                dic['seveen'] = "a"
+                dic['eight'] = "a"
+
             db_ins = attendance(
                 roll_no = stu,
                 s_class = clas,
@@ -202,6 +232,7 @@ def mark_attendance(request):
 @allowed_users(allowed_roles=['faculty'])
 def add_timetable(request):
     email=request.session['staff_email']
+
     fac = faculty_detail.objects.get(email=email)
     try:
         clas = classes.objects.get(teacher=fac)
@@ -274,3 +305,57 @@ def add_timetable(request):
     subj = subject.objects.filter(class_id=clas.class_id)
     context = {'subjects':subj}
     return render(request, 'add_timetable.html', context=context)
+
+@login_required(login_url=LOGIN_URL)
+@allowed_users(allowed_roles=['faculty'])
+def showreport(request):
+    stu_atten.objects.all().delete()
+    email=request.session['staff_email']
+    fac = faculty_detail.objects.get(email=email)
+    clas = classes.objects.get(teacher=fac)
+    students = student_detail.objects.filter(s_class = clas)
+    attendanc = attendance.objects.filter(s_class = clas)
+    stu =  list(student_detail.objects.all())
+    ran_stu = random.choice(stu)
+    atten = attendance.objects.filter(roll_no = ran_stu)
+    working_days = len(list(atten))
+    if working_days==0:
+        working_days=1
+    stu1=student_detail.objects.all()
+
+    for i in stu1: 
+        present = len(list(attendance.objects.filter(roll_no=i,overall="p")))
+        absent = len(list(attendance.objects.filter(roll_no=i,overall="a")))
+        percentage = (present/working_days)*100
+        status=""
+        if percentage>75:
+            status=False
+        else:
+            status=True    
+        db_inst = stu_atten(
+            name=i.name,
+            roll = i.roll_no,
+            total_present = present,
+            total_absent = absent,
+            percentage = percentage,
+            status=status,
+            date_gen = datetime.date.today()
+        )
+        db_inst.save()
+    stu_det = stu_atten.objects.filter(date_gen=datetime.date.today())
+    
+        
+    
+    context = {"students":stu_det, "working_days":working_days}
+    
+    return render(request, 'showreport.html', context=context)
+
+def sendwarning(request):
+    if request.method == "POST":
+        roll = request.POST.get("roll")
+        stu = student_detail.objects.get(roll_no=roll)
+        if func.send_warning_mail(stu.email,stu.name):
+            messages.success(request, "Warning Sent!!")
+        else:
+            messages.success(request,"Warning not Sent!!")
+    return redirect("showreport")

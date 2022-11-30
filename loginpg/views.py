@@ -11,21 +11,22 @@ def ulogin(request):
         username = request.POST.get('uname')
         password = request.POST.get('psw')
         user = authenticate(username=username, password=password)
-        try:
-            b = list(user.groups.filter(name='faculty'))!=[]
-        except:
-            messages.error(request,"Incorrect Credentials")
-            return redirect('ulogin')
         
-        if b and user is not None:
-            login(request,user)
-            staff = faculty_detail.objects.get(email=username)
-            request.session['staff_email']=staff.email
-            return redirect('facdash')
-        elif user is not None:
-                login(request,user)
+        if user is not None:
+            try:
+                role = str(user.groups.filter().get())
+            except:
+                messages.error(request, "Something Went Wrong!")
+                return redirect('ulogin')
+            if role == 'hod':
+                login(request, user)
                 return redirect('hodash')
+            elif role == 'faculty':
+                login(request, user)
+                request.session['staff_email'] = request.user.username
+                return redirect('facdash')
         else:
             messages.error(request, "Incorrect Credentials")
             return redirect('ulogin')
+
     return render(request,'login.html')
